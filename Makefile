@@ -83,6 +83,7 @@ AS = $(TOOLPREFIX)gas
 LD = $(TOOLPREFIX)ld
 OBJCOPY = $(TOOLPREFIX)objcopy
 OBJDUMP = $(TOOLPREFIX)objdump
+GDB = gdb-multiarch
 
 CFLAGS = -Wall -Werror -O -fno-omit-frame-pointer -ggdb
 
@@ -261,7 +262,7 @@ QEMUGDB = $(shell if $(QEMU) -help | grep -q '^-gdb'; \
 	then echo "-gdb tcp::$(GDBPORT)"; \
 	else echo "-s -p $(GDBPORT)"; fi)
 ifndef CPUS
-CPUS := 3
+CPUS := 1
 endif
 ifeq ($(LAB),fs)
 CPUS := 1
@@ -298,6 +299,9 @@ server:
 ping:
 	python3 ping.py $(FWDPORT)
 endif
+
+gdb: .gdbinit
+	$(GDB) -n -x $<
 
 ##
 ##  FOR testing lab grading script
