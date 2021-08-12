@@ -231,6 +231,8 @@ userinit(void)
 
   p->state = RUNNABLE;
 
+  p->tracemask = 0;
+
   release(&p->lock);
 }
 
@@ -295,6 +297,8 @@ fork(void)
   pid = np->pid;
 
   np->state = RUNNABLE;
+
+  np->tracemask = p->tracemask;
 
   release(&np->lock);
 
