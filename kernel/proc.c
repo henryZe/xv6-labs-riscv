@@ -698,3 +698,16 @@ procdump(void)
     printf("\n");
   }
 }
+
+uint64 cal_kfreeprocs(void)
+{
+  uint64 n = 0;
+  struct proc *p;
+
+  for (p = proc; p < &proc[NPROC]; p++) {
+    if (p->state != UNUSED)
+      n++;
+  }
+
+  return n;
+}
