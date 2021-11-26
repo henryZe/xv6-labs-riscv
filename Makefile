@@ -68,7 +68,7 @@ AS = $(TOOLPREFIX)gas
 LD = $(TOOLPREFIX)ld
 OBJCOPY = $(TOOLPREFIX)objcopy
 OBJDUMP = $(TOOLPREFIX)objdump
-GDB = riscv64-unknown-elf-gdb
+GDB = gdb-multiarch
 
 CFLAGS = -Wall -Werror -O -fno-omit-frame-pointer -ggdb
 
