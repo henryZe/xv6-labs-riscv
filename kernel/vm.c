@@ -449,11 +449,19 @@ static int vmprint_level(pagetable_t pagetable, int level)
     if (pte & PTE_V) {
       uint64 pa = PTE2PA(pte);
 
-      printf("..");
       for (int j = 0; j < level; j++) {
-        printf(" ..");
+        printf(".. ");
       }
-      printf("%d: pte %p pa %p\n", i, pte, pa);
+      printf("..%d: pte %p pa %p", i, pte, pa);
+      if (pte & PTE_R)
+        printf(" PTE_R");
+      if (pte & PTE_W)
+        printf(" PTE_W");
+      if (pte & PTE_X)
+        printf(" PTE_X");
+      if (pte & PTE_U)
+        printf(" PTE_U");
+      printf("\n");
 
       if ((pte & (PTE_R|PTE_W|PTE_X)) == 0) {
         // this PTE points to a lower-level page table.
